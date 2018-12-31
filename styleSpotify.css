@@ -1,0 +1,158 @@
+:root {
+    font-size: 62.5%;
+}
+
+* {
+    font-family: helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(30, 30, 30);
+}
+
+h1 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    position: fixed;
+    top: 1rem;
+    left: 2rem;
+    width:100%;
+    z-index:1;
+}
+
+#title {
+    background-color: white;
+    color: black;
+    font-size: 8rem;
+    padding: .5rem 2rem .5rem 2rem;
+}
+#title:hover {
+    background-color: salmon;
+    color: white;
+    cursor: pointer;
+}
+
+
+#songlist {
+    margin-top: 15rem;
+    margin-bottom: 15rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 70rem;
+    padding-left: 1em;
+    padding-right: 1em;
+    /* flex */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.song {
+    margin-top: 3rem;
+    margin-left: 1em;
+    margin-right: 1em;
+    padding: .5rem;
+    width: 20rem;
+    position: relative;
+}
+.song.selected {
+    outline: solid white;
+}
+
+.cover-box {
+    position: relative;
+    height: 20rem;
+    width:20rem;
+    text-align: center;
+}
+
+.artwork {
+    height: auto;
+    width:100%;
+}
+
+.control-icon {
+    /* background-color: black;
+    border-radius: 50%; */
+    background-size: contain;
+    display: none;
+    height: 5rem;
+    width: 5rem;
+    /* center relative to cover-box */
+    position: absolute;
+    top: calc(50% - 2.5rem);
+    left: calc(50% - 2.5rem);
+}
+.control-icon.play{
+    background-image: url(./ressources/icons/play.png);
+    display: block;
+    /* border: solid white .1rem; */
+}
+.control-icon.pause{
+    background-image: url(./ressources/icons/pause.png);
+    display: block;
+    /* border: solid white .1rem; */
+}
+
+.title {
+    color: white;
+    font-family: 'Montserrat';
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0rem;
+    margin-top: .2em;
+}
+
+.date {
+    color: silver;
+    font-family: 'Montserrat';
+    font-size: 1.2rem;
+    font-weight: 200;
+    margin-top: .2em;
+}
+
+.artwork:hover, .control-icon:hover{
+    cursor: pointer;
+}
+.artwork.selected{
+    filter: brightness(30%);
+}
+
+/* montserrat-200 - latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 200;
+  src: local('Montserrat ExtraLight'), local('Montserrat-ExtraLight'),
+       url('./ressources/fonts/montserrat-v12-latin/montserrat-v12-latin-200.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./ressources/fonts/montserrat-v12-latin/montserrat-v12-latin-200.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-regular - latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'),
+       url('./ressources/fonts/montserrat-v12-latin/montserrat-v12-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./ressources/fonts/montserrat-v12-latin/montserrat-v12-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-600 - latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'),
+       url('./ressources/fonts/montserrat-v12-latin/montserrat-v12-latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./ressources/fonts/montserrat-v12-latin/montserrat-v12-latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-800 - latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'),
+       url('./ressources/fonts/montserrat-v12-latin/montserrat-v12-latin-800.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./ressources/fonts/montserrat-v12-latin/montserrat-v12-latin-800.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}

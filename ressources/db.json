@@ -1,0 +1,26 @@
+[
+    {
+        "name":"80s",
+        "audio_path":"ressources/audio/80s.wav",
+        "artwork_path":"ressources/artwork/80s.png",
+        "date_created":"2018-12-10"
+    },
+    {
+        "name":"NODA-I",
+        "audio_path":"ressources/audio/NODA-I.wav",
+        "artwork_path":"ressources/artwork/NODA-I.png",
+        "date_created":"2017-02-20"
+    },
+    {
+        "name":"NODA-II",
+        "audio_path":"ressources/audio/NODA-II.wav",
+        "artwork_path":"ressources/artwork/NODA-II.png",
+        "date_created":"2017-02-20"
+    },
+    {
+        "name":"TMZremix",
+        "audio_path":"ressources/audio/TMZremix.mp3",
+        "artwork_path":"ressources/artwork/TMZremix.jpg",
+        "date_created":"2015-02"
+    }
+]
