@@ -12,7 +12,7 @@ function main(){
         displaySongList(songs);
         displaySongList(songs);
     })
-    .then(addControlListeners);
+    .then(addListeners);
 
     document.getElementById('title').addEventListener('click', function(){
         scroll(0,0);
@@ -39,10 +39,11 @@ function makeSongHTML(song){
     const artwork = '<img src=./'+song.artwork_path+' class="artwork">\n';
     const controlIcon = '<div class="control-icon"></div>\n';
     const coverBox = '<div class="cover-box">\n'+artwork+controlIcon+'</div>\n';
-    const audio = '<audio class="player" src='+song.audio_path+'>\n</audio>';
-    const name = '<p class="title">'+song.name+'</p>\n';
-    const dateCreated = '<p class="date">'+song.date_created+'</p>';
-    return coverBox+audio+name+dateCreated;
+    const audio = '<audio class="audio" src='+song.audio_path+'>\n</audio>';
+    const name = '<span class="title">'+song.name+'</span>\n';
+    const dateCreated = '<span class="date">'+song.date_created+'</span>';
+    const descBox = '<div class="desc-box">\n'+dateCreated+name+'</div>\n';
+    return coverBox+audio+descBox;
 }
 
 function addClassEventListener(classStr, eventStr, fn){
@@ -53,17 +54,18 @@ function addClassEventListener(classStr, eventStr, fn){
     }
 }
 
-function addControlListeners(){
+function addListeners(){
     addClassEventListener('artwork','click',togglePlay);
     addClassEventListener('control-icon','click',togglePlay);
     addClassEventListener('artwork','mouseenter',styleArtworkSelected);
     addClassEventListener('artwork','mouseleave',unstyleArtworkSelected);
     addClassEventListener('control-icon','mouseenter',styleArtworkSelected);
     addClassEventListener('control-icon','mouseleave',unstyleArtworkSelected);
+    addClassEventListener('audio','ended',audioEnded);
 }
 
-function getPlayer(song){
-    return song.getElementsByClassName('player')[0];
+function getAudio(song){
+    return song.getElementsByClassName('audio')[0];
 }
 function getArtwork(song){
     return song.getElementsByClassName('artwork')[0];
@@ -74,7 +76,7 @@ function getControlIcon(song){
 
 function updateControlIcon(song){
     var controlIcon = getControlIcon(song);
-    if(getPlayer(song).paused){
+    if(getAudio(song).paused){
         controlIcon.classList.remove('pause');
         controlIcon.classList.add('play');
     }
@@ -91,7 +93,7 @@ function togglePlay(){
         stopSong(previousSong);
         playSong(currentSong);
     }
-    else if(getPlayer(currentSong).paused)
+    else if(getAudio(currentSong).paused)
         playSong(currentSong);
     else{
         pauseSong(currentSong);
@@ -99,19 +101,20 @@ function togglePlay(){
     updateControlIcon(currentSong);
 }
 function stopSong(song){
-    var player = getPlayer(song);
-    player.pause();
-    player.currentTime = 0;
+    var audio = getAudio(song);
+    audio.pause();
+    audio.currentTime = 0;
     song.classList.remove('selected');
 }
 function playSong(song){
-    getPlayer(song).play();
+    getAudio(song).play();
+    getAudio(song).currentTime = 60;
     song.classList.add('selected');
     updateControlIcon(song);
 }
 function pauseSong(song){
-    var player = getPlayer(song);
-    player.pause();
+    var audio = getAudio(song);
+    audio.pause();
 }
 
 function styleArtworkSelected(){
@@ -124,4 +127,8 @@ function unstyleArtworkSelected(){
     getArtwork(song).classList.remove('selected');
     getControlIcon(song).classList.remove('play');
     getControlIcon(song).classList.remove('pause');
+}
+
+function audioEnded(){
+    this.parentNode.classList.remove('selected');
 }

@@ -22,5 +22,11 @@
         "audio_path":"ressources/audio/TMZremix.mp3",
         "artwork_path":"ressources/artwork/TMZremix.jpg",
         "date_created":"2015-02"
+    },
+    {
+        "name":"i can't believe we didn't burn away",
+        "audio_path":"ressources/audio/cantbelieve.wav",
+        "artwork_path":"ressources/artwork/cantbelieve.jpg",
+        "date_created":"2015-07-04"
     }
 ]
