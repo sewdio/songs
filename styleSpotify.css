@@ -56,9 +56,10 @@ body {
     width: 20rem;
     position: relative;
 }
-.song.selected {
+.song.active {
     outline: solid white;
 }
+
 
 .cover-box {
     position: relative;
@@ -66,15 +67,19 @@ body {
     width:20rem;
     text-align: center;
 }
+.cover-box:hover {
+    cursor: pointer;
+}
 
 .artwork {
     height: auto;
     width:100%;
 }
+.song.selected > .cover-box > .artwork {
+    filter: brightness(30%);
+}
 
 .control-icon {
-    /* background-color: black;
-    border-radius: 50%; */
     background-size: contain;
     display: none;
     height: 5rem;
@@ -84,15 +89,19 @@ body {
     top: calc(50% - 2.5rem);
     left: calc(50% - 2.5rem);
 }
-.control-icon.play{
-    background-image: url(./ressources/icons/play.png);
+.song.selected > .cover-box > .control-icon {
     display: block;
-    /* border: solid white .1rem; */
+    content: url(./ressources/icons/play.png);
 }
-.control-icon.pause{
-    background-image: url(./ressources/icons/pause.png);
+.song.playing:not(.selected) > .cover-box > .control-icon {
     display: block;
-    /* border: solid white .1rem; */
+    content: url(./ressources/icons/audio.png);
+    background-color: rgba(0,0,0,.5);
+    border-radius:50%;
+}
+.song.playing.selected > .cover-box > .control-icon {
+    display: block;
+    content: url(./ressources/icons/pause.png);
 }
 
 .desc-box {
@@ -114,13 +123,6 @@ body {
     font-weight: 200;
     float: right;
     padding-top: .4rem;
-}
-
-.artwork:hover, .control-icon:hover{
-    cursor: pointer;
-}
-.artwork.selected{
-    filter: brightness(30%);
 }
 
 /* montserrat-200 - latin */

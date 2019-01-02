@@ -36,13 +36,17 @@ function displaySongList(songs){
 }
 function makeSongHTML(song){
     var html = "";
-    const artwork = '<img src=./'+song.artwork_path+' class="artwork">\n';
-    const controlIcon = '<div class="control-icon"></div>\n';
+
+    const artwork = '<img class="artwork" src=./'+song.artwork_path+'>\n';
+    const controlIcon = '<img class="control-icon"></div>\n';
     const coverBox = '<div class="cover-box">\n'+artwork+controlIcon+'</div>\n';
+
     const audio = '<audio class="audio" src='+song.audio_path+'>\n</audio>';
+
     const name = '<span class="title">'+song.name+'</span>\n';
     const dateCreated = '<span class="date">'+song.date_created+'</span>';
     const descBox = '<div class="desc-box">\n'+dateCreated+name+'</div>\n';
+
     return coverBox+audio+descBox;
 }
 
@@ -55,80 +59,65 @@ function addClassEventListener(classStr, eventStr, fn){
 }
 
 function addListeners(){
-    addClassEventListener('artwork','click',togglePlay);
-    addClassEventListener('control-icon','click',togglePlay);
-    addClassEventListener('artwork','mouseenter',styleArtworkSelected);
-    addClassEventListener('artwork','mouseleave',unstyleArtworkSelected);
-    addClassEventListener('control-icon','mouseenter',styleArtworkSelected);
-    addClassEventListener('control-icon','mouseleave',unstyleArtworkSelected);
-    addClassEventListener('audio','ended',audioEnded);
+    addClassEventListener('cover-box','click',coverBoxClick);
+    addClassEventListener('cover-box','mouseover',coverBoxHover);
+    addClassEventListener('cover-box','mouseleave',coverBoxLeave);
+    addClassEventListener('audio','ended',playNextSong);
+    addClassEventListener('audio','loadedmetadata',addSongDuration);
 }
 
 function getAudio(song){
     return song.getElementsByClassName('audio')[0];
 }
-function getArtwork(song){
-    return song.getElementsByClassName('artwork')[0];
-}
-function getControlIcon(song){
-    return song.getElementsByClassName('control-icon')[0];
-}
 
-function updateControlIcon(song){
-    var controlIcon = getControlIcon(song);
-    if(getAudio(song).paused){
-        controlIcon.classList.remove('pause');
-        controlIcon.classList.add('play');
-    }
-    else{
-        controlIcon.classList.remove('play');
-        controlIcon.classList.add('pause');
-    }
+function stopSong(song){
+    var audio = getAudio(song);
+    pauseSong(song);
+    audio.currentTime = 0;
+    song.classList.remove('active');
 }
-
-function togglePlay(){
-    var previousSong = currentSong;
-    currentSong = this.parentNode.parentNode;
+function playSong(song){
+    getAudio(song).play();
+    getAudio(song).currentTime = 0;
+    song.classList.add('active');
+    song.classList.add('playing');
+}
+function pauseSong(song){
+    var audio = getAudio(song);
+    audio.pause();
+    song.classList.remove('playing');
+}
+function togglePlay(requestedSong, previousSong = null){
+    currentSong = requestedSong;
     if(previousSong && previousSong != currentSong){
         stopSong(previousSong);
         playSong(currentSong);
     }
     else if(getAudio(currentSong).paused)
         playSong(currentSong);
-    else{
+    else
         pauseSong(currentSong);
-    }
-    updateControlIcon(currentSong);
 }
-function stopSong(song){
-    var audio = getAudio(song);
-    audio.pause();
-    audio.currentTime = 0;
+
+function coverBoxClick(){
+    var previousSong = currentSong;
+    requestedSong = this.parentNode;
+    togglePlay(requestedSong, previousSong);
+}
+function coverBoxHover(){
+    var song = this.parentNode;
+    song.classList.add('selected');
+}
+function coverBoxLeave(){
+    var song = this.parentNode;
     song.classList.remove('selected');
 }
-function playSong(song){
-    getAudio(song).play();
-    getAudio(song).currentTime = 60;
-    song.classList.add('selected');
-    updateControlIcon(song);
-}
-function pauseSong(song){
-    var audio = getAudio(song);
-    audio.pause();
+
+function playNextSong(){
+    var nextSong = this.parentNode.nextSibling;
+    togglePlay(nextSong);
 }
 
-function styleArtworkSelected(){
-    var song = this.parentNode.parentNode;
-    getArtwork(song).classList.add('selected');
-    updateControlIcon(song);
-}
-function unstyleArtworkSelected(){
-    var song = this.parentNode.parentNode;
-    getArtwork(song).classList.remove('selected');
-    getControlIcon(song).classList.remove('play');
-    getControlIcon(song).classList.remove('pause');
-}
-
-function audioEnded(){
-    this.parentNode.classList.remove('selected');
+function addSongDuration(){
+    var song = this.parentNode;
 }
