@@ -28,5 +28,11 @@
         "audio_path":"ressources/audio/cantbelieve.wav",
         "artwork_path":"ressources/artwork/cantbelieve.jpg",
         "date_created":"2015-07-04"
+    },
+    {
+        "name":"LAKE SLIDE",
+        "audio_path":"ressources/audio/lakeslide.wav",
+        "artwork_path":"ressources/artwork/lakeslide.png",
+        "date_created":"2016-10-05"
     }
 ]

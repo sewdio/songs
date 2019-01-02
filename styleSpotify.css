@@ -3,7 +3,6 @@
 }
 
 * {
-    font-family: helvetica, sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -13,29 +12,37 @@ body {
 }
 
 #banner-box {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
     position: fixed;
-    top: 1rem;
+    top: 4rem;
     left: 2rem;
-    width:100%;
     z-index:1;
 }
-
+#title-box {
+    cursor: pointer;
+}
+#title-seek-bar, #title{
+    font-size: 8rem;
+    font-family: Arial Black,Arial Bold,Gadget,sans-serif;
+    padding: .5rem .5rem;
+}
+#title-seek-bar {
+    background-color: salmon;
+    color: white;
+    display: none;
+    position: absolute;
+    z-index: 2;
+}
+#title-box:hover > #title-seek-bar {
+    display: block;
+}
 #title {
     background-color: white;
     color: black;
-    font-size: 8rem;
-    padding: .5rem 2rem .5rem 2rem;
-}
-#title:hover {
-    background-color: salmon;
-    color: white;
-    cursor: pointer;
+    float:left;
 }
 
-#songlist {
-    margin-top: 15rem;
+#song-list {
+    margin-top: 20rem;
     margin-bottom: 15rem;
     margin-left: auto;
     margin-right: auto;
@@ -49,7 +56,7 @@ body {
 }
 
 .song {
-    margin-top: 3rem;
+    margin-bottom: 2rem;
     margin-left: 1em;
     margin-right: 1em;
     padding: .5rem .5rem 0rem .5rem;
@@ -59,7 +66,6 @@ body {
 .song.active {
     outline: solid white;
 }
-
 
 .cover-box {
     position: relative;
@@ -75,7 +81,7 @@ body {
     height: auto;
     width:100%;
 }
-.song.selected > .cover-box > .artwork {
+.cover-box:hover > .artwork {
     filter: brightness(30%);
 }
 
@@ -89,40 +95,50 @@ body {
     top: calc(50% - 2.5rem);
     left: calc(50% - 2.5rem);
 }
-.song.selected > .cover-box > .control-icon {
+.cover-box:hover > .control-icon {
     display: block;
     content: url(./ressources/icons/play.png);
 }
-.song.playing:not(.selected) > .cover-box > .control-icon {
+.song.playing > .cover-box:not(:hover) > .control-icon {
     display: block;
     content: url(./ressources/icons/audio.png);
     background-color: rgba(0,0,0,.5);
     border-radius:50%;
 }
-.song.playing.selected > .cover-box > .control-icon {
+.song.playing > .cover-box:hover > .control-icon {
     display: block;
     content: url(./ressources/icons/pause.png);
 }
-
-.desc-box {
-    padding: .8rem .1rem .8rem .1rem;
+.cover-box:active > .control-icon {
+    filter: brightness(60%);
 }
 
-.title {
+.desc-box {
+    padding: .6rem .1rem .6rem .1rem;
+}
+
+.duration, .date {
+    color: silver;
+    font-family: 'Montserrat';
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+.date {
+    float: left;
+    width: 50%;
+}
+.duration {
+    float: right;
+    width: 50%;
+    text-align: right;
+}
+
+.name {
     color: white;
     font-family: 'Montserrat';
     font-size: 1.6rem;
     font-weight: 600;
     letter-spacing: 0rem;
-}
-
-.date {
-    color: silver;
-    font-family: 'Montserrat';
-    font-size: 1.2rem;
-    font-weight: 200;
-    float: right;
-    padding-top: .4rem;
 }
 
 /* montserrat-200 - latin */

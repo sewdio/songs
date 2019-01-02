@@ -14,9 +14,7 @@ function main(){
     })
     .then(addListeners);
 
-    document.getElementById('title').addEventListener('click', function(){
-        scroll(0,0);
-    });
+    document.getElementById('title-box').addEventListener('mousemove', titleMouseMove);
 }
 
 function sortByKey(array, key, direction="ascending") {
@@ -26,12 +24,12 @@ function sortByKey(array, key, direction="ascending") {
     });
 }
 function displaySongList(songs){
-    var songlist = document.getElementById('songlist');
+    var songList = document.getElementById('song-list');
     songs.forEach(function(song){
         var div = document.createElement('div');
         div.className = "song";
         div.innerHTML = makeSongHTML(song);
-        songlist.appendChild(div);
+        songList.appendChild(div);
     })
 }
 function makeSongHTML(song){
@@ -43,25 +41,22 @@ function makeSongHTML(song){
 
     const audio = '<audio class="audio" src='+song.audio_path+'>\n</audio>';
 
-    const name = '<span class="title">'+song.name+'</span>\n';
-    const dateCreated = '<span class="date">'+song.date_created+'</span>';
-    const descBox = '<div class="desc-box">\n'+dateCreated+name+'</div>\n';
+    const dateCreated = '<div class="date">'+song.date_created+'</div>\n';
+    const duration = '<div class="duration"></div>\n';
+    const name = '<span class="name">'+song.name+'</span>\n';
+    const descBox = '<div class="desc-box">\n'+dateCreated+duration+name+'</div>\n';
 
     return coverBox+audio+descBox;
 }
 
 function addClassEventListener(classStr, eventStr, fn){
     var nodeList = document.getElementsByClassName(classStr);
-    for(var i = 0; i < nodeList.length; i++)
-    {
+    for(var i = 0; i < nodeList.length; i++){
        nodeList.item(i).addEventListener(eventStr, fn);
     }
 }
-
 function addListeners(){
     addClassEventListener('cover-box','click',coverBoxClick);
-    addClassEventListener('cover-box','mouseover',coverBoxHover);
-    addClassEventListener('cover-box','mouseleave',coverBoxLeave);
     addClassEventListener('audio','ended',playNextSong);
     addClassEventListener('audio','loadedmetadata',addSongDuration);
 }
@@ -69,7 +64,6 @@ function addListeners(){
 function getAudio(song){
     return song.getElementsByClassName('audio')[0];
 }
-
 function stopSong(song){
     var audio = getAudio(song);
     pauseSong(song);
@@ -100,24 +94,27 @@ function togglePlay(requestedSong, previousSong = null){
 }
 
 function coverBoxClick(){
+    console.log('mouseup');
     var previousSong = currentSong;
     requestedSong = this.parentNode;
     togglePlay(requestedSong, previousSong);
 }
-function coverBoxHover(){
-    var song = this.parentNode;
-    song.classList.add('selected');
-}
-function coverBoxLeave(){
-    var song = this.parentNode;
-    song.classList.remove('selected');
-}
-
 function playNextSong(){
     var nextSong = this.parentNode.nextSibling;
     togglePlay(nextSong);
 }
-
 function addSongDuration(){
+    // *this* is an audio node
     var song = this.parentNode;
+    var durationNode = song.getElementsByClassName('duration')[0];
+    var d = this.duration;
+    durationNode.innerHTML = Math.trunc(d/60) +':'+ Math.trunc(d%60);
+}
+
+function titleMouseMove(e){
+    var x = e.offsetX;
+    var pct = e.offsetX / this.offsetWidth;
+    var insetPct = 100 - (pct*100);
+    var titleSeekBar = document.getElementById('title-seek-bar');
+    titleSeekBar.style.clipPath = 'inset(0 '+insetPct+'% 0 0)';
 }
