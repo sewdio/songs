@@ -14,7 +14,8 @@ function main(){
     })
     .then(addListeners);
 
-    document.getElementById('title-box').addEventListener('mousemove', titleMouseMove);
+    var title = document.getElementById('title');
+    title.addEventListener('click', titleClick);
 }
 
 function sortByKey(array, key, direction="ascending") {
@@ -117,4 +118,8 @@ function titleMouseMove(e){
     var insetPct = 100 - (pct*100);
     var titleSeekBar = document.getElementById('title-seek-bar');
     titleSeekBar.style.clipPath = 'inset(0 '+insetPct+'% 0 0)';
+}
+
+function titleClick(){
+    scroll(0,0);
 }

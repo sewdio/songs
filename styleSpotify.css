@@ -17,28 +17,17 @@ body {
     left: 2rem;
     z-index:1;
 }
-#title-box {
+#title {
+    background-color: white;
     cursor: pointer;
-}
-#title-seek-bar, #title{
+    color: black;
     font-size: 8rem;
     font-family: Arial Black,Arial Bold,Gadget,sans-serif;
     padding: .5rem .5rem;
 }
-#title-seek-bar {
+#title:hover {
     background-color: salmon;
     color: white;
-    display: none;
-    position: absolute;
-    z-index: 2;
-}
-#title-box:hover > #title-seek-bar {
-    display: block;
-}
-#title {
-    background-color: white;
-    color: black;
-    float:left;
 }
 
 #song-list {
