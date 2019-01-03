@@ -42,11 +42,7 @@ body { background-color: rgb(30, 30, 30);}
     -khtml-user-select: none; /* webkit (konqueror) */
     -ms-user-select: none; /* IE10+ */
 }
-.time {
-    font-family:  Arial Black;
-    font-size: 1rem;
-    color: black;
-}
+
 #play-btn, #volume-btn{
     box-sizing: border-box;
     padding:1rem;
@@ -55,43 +51,49 @@ body { background-color: rgb(30, 30, 30);}
 #play-btn {
     content: url(./ressources/icons/play-black.png);
 }
+#play-btn.paused {
+    content: url(./ressources/icons/pause-black.png)
+}
+
 #volume-btn {
     content: url(./ressources/icons/audio-black.png);
 }
+
+#time-passed, #total-time {
+    font-family:  Arial Black;
+    font-size: 1rem;
+    color: black;
+}
+
 #timeline {
+    background-color: grey;
+    height: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
-    height: 25%;
-    position: relative;
+    /* make the clickable zone bigger */
+    background-clip: content-box;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
     /* flexbox */
     display: flex;
     align-items: center;
     flex-grow: 1;
 }
-#progress-bg{
-    background-color: grey;
-    height: 1rem;
-    position: absolute;
-    width:100%;
-    z-index: 0;
-}
-#progress-bar{
-    background-color: salmon;
-    height: 1rem;
-    width: 0%;
-    z-index: 1;
 
+#progressbar{
+    background-color: black;
+    height: 1rem;
+    margin-right: -.5rem;
+    width: 0%;
 }
-#timeline:hover > #progress-bar{
+#timeline:hover > #progressbar{
     background-color: aquamarine;
 }
-#progress-handle{
+#timeline:hover > #playhead{
     background-color: white;
     /* border-radius: 100rem; */
     height: 1rem;
     width: 1rem;
-    margin-right: -.5rem;
-    z-index: 1;
 }
 
 /* --------- */
@@ -138,7 +140,7 @@ body { background-color: rgb(30, 30, 30);}
     width:100%;
 }
 .cover-box:hover > .artwork {
-    filter: brightness(30%);
+    filter: brightness(45%);
 }
 
 .control-icon {
