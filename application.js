@@ -6,16 +6,14 @@ function main(){
     fetch("./ressources/db.json")
     .then(response => response.json())
     .then(parsed => sortByKey(parsed, "date_created", "descending"))
-    .then(function(sorted){
-        songs = sorted.reverse();
-        displaySongList(songs);
-        displaySongList(songs);
-        displaySongList(songs);
-    })
+    .then(sorted => displaySongList(sorted.reverse()))
     .then(addListeners);
 
     var title = document.getElementById('title');
     title.addEventListener('click', titleClick);
+
+    var timeline = document.getElementById('timeline');
+    timeline.addEventListener('click', timelineClick);
 }
 
 function sortByKey(array, key, direction="ascending") {
@@ -44,7 +42,7 @@ function makeSongHTML(song){
 
     const dateCreated = '<div class="date">'+song.date_created+'</div>\n';
     const duration = '<div class="duration"></div>\n';
-    const name = '<span class="name">'+song.name+'</span>\n';
+    const name = '<div class="name">'+song.name+'</div>\n';
     const descBox = '<div class="desc-box">\n'+dateCreated+duration+name+'</div>\n';
 
     return coverBox+audio+descBox;
@@ -112,14 +110,19 @@ function addSongDuration(){
     durationNode.innerHTML = Math.trunc(d/60) +':'+ Math.trunc(d%60);
 }
 
-function titleMouseMove(e){
-    var x = e.offsetX;
-    var pct = e.offsetX / this.offsetWidth;
-    var insetPct = 100 - (pct*100);
-    var titleSeekBar = document.getElementById('title-seek-bar');
-    titleSeekBar.style.clipPath = 'inset(0 '+insetPct+'% 0 0)';
-}
-
 function titleClick(){
     scroll(0,0);
+}
+
+function getMouseXPercent(e, element){
+    var bounds = element.getBoundingClientRect();
+    var x = e.clientX - bounds.left;
+    var pct = x * 100 / e.currentTarget.offsetWidth;
+    return pct;
+}
+
+function timelineClick(e){
+    var pct = getMouseXPercent(e, this);
+    var progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = pct+'%';
 }

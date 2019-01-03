@@ -34,5 +34,65 @@
         "audio_path":"ressources/audio/lakeslide.wav",
         "artwork_path":"ressources/artwork/lakeslide.png",
         "date_created":"2016-10-05"
+    },
+    {
+        "name":"~",
+        "audio_path":"ressources/audio/~.wav",
+        "artwork_path":"ressources/artwork/~.png",
+        "date_created":"2015-10-05"
+    },
+    {
+        "name":"rusloths",
+        "audio_path":"ressources/audio/rusloths.wav",
+        "artwork_path":"ressources/artwork/rusloths.png",
+        "date_created":"2015-10-14"
+    },
+    {
+        "name":"été?",
+        "audio_path":"ressources/audio/été.wav",
+        "artwork_path":"ressources/artwork/été.png",
+        "date_created":"2015-09-10"
+    },
+    {
+        "name":"we come in peace",
+        "audio_path":"ressources/audio/wecomeinpeace.wav",
+        "artwork_path":"ressources/artwork/wecomeinpeace.jpg",
+        "date_created":"2015-08-27"
+    },
+    {
+        "name":"acca",
+        "audio_path":"ressources/audio/acca.wav",
+        "artwork_path":"ressources/artwork/acca.png",
+        "date_created":"2015-08-19"
+    },
+    {
+        "name":"chevalier",
+        "audio_path":"ressources/audio/chevalier.wav",
+        "artwork_path":"ressources/artwork/chevalier.png",
+        "date_created":"2015-08-13"
+    },
+    {
+        "name":"mecke",
+        "audio_path":"ressources/audio/mecke.wav",
+        "artwork_path":"ressources/artwork/mecke.png",
+        "date_created":"2015-07-31"
+    },
+    {
+        "name":"lusha",
+        "audio_path":"ressources/audio/lusha.wav",
+        "artwork_path":"ressources/artwork/lusha.jpg",
+        "date_created":"2015-08-27"
+    },
+    {
+        "name":"rebel one excalibur",
+        "audio_path":"ressources/audio/rebelone.wav",
+        "artwork_path":"ressources/artwork/rebelone.jpg",
+        "date_created":"2015-08-23"
+    },
+    {
+        "name":"statufiés",
+        "audio_path":"ressources/audio/statufiés.wav",
+        "artwork_path":"ressources/artwork/statufiés.png",
+        "date_created":"2015-08-15"
     }
 ]
