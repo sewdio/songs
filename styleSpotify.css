@@ -1,37 +1,49 @@
-:root { font-size: 62.5%;}
+:root {
+    font-size: 62.5%;
+    --top-box-height: 12rem;
+    --player-height: 4rem;
+    --banner-box-border-size: 1rem;
+}
 * { margin: 0; padding: 0; }
 body { background-color: rgb(30, 30, 30);}
 
-/* ---------- */
+/* ###################################################################### */
 /* Banner box */
 
 #banner-box {
-    /* fix in top left corner */
+    border: solid darkslategrey var(--banner-box-border-size);
+    border-bottom: 0rem;
     position: fixed;
     top: 4rem;
     left: 2rem;
     z-index:1;
+    height : calc(var(--top-box-height) + var(--player-height));
     /* flexbox */
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
 }
+
+/* title */
 
 #title {
     background-color: white;
     cursor: pointer;
-    color: black;
+    color: darkslategrey;
     font-size: 8rem;
     font-family: Arial Black,Arial Bold,Gadget,sans-serif;
+    height: var(--top-box-height);
 }
 #title:hover {
-    background-color: salmon;
+    background-color: darkslategrey;
     color: white;
 }
 
+/* audio player */
+
 #audio-player{
-    background: white;
-    height: 4rem;
+    background: darkslategrey;
+    height: var(--player-height);
+    overflow: hidden;
     /* flexbox */
     display: flex;
     flex-direction: row;
@@ -49,27 +61,46 @@ body { background-color: rgb(30, 30, 30);}
     width: 4rem;
 }
 #play-btn {
-    content: url(./ressources/icons/play-black.png);
+    content: url(./ressources/icons/play.png);
+    padding-left: 1.2rem;
+    padding-right: .8rem;
 }
 #play-btn.paused {
-    content: url(./ressources/icons/pause-black.png)
+    content: url(./ressources/icons/pause.png);
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+#play-btn:hover {
+    background-color: rgba(100%,100%,100%,.2);
 }
 
 #volume-btn {
-    content: url(./ressources/icons/audio-black.png);
+    content: url(./ressources/icons/audio.png);
+}
+#play-btn:hover {
+    background-color: rgba(100%,100%,100%,.2);
 }
 
 #time-passed, #total-time {
-    font-family:  Arial Black;
+    color: white;
+    font-family: 'Montserrat';
     font-size: 1rem;
-    color: black;
+    font-weight: 200;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 3rem;
+}
+#time-passed {
+    text-align: center;
+}
+#total-time {
+    text-align: center;
 }
 
 #timeline {
-    background-color: grey;
+    background-color: rgb(27,59,59);
     height: 1rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    overflow: hidden;
     /* make the clickable zone bigger */
     background-clip: content-box;
     padding-bottom: 1rem;
@@ -81,26 +112,79 @@ body { background-color: rgb(30, 30, 30);}
 }
 
 #progressbar{
-    background-color: black;
+    background-color: teal;
     height: 1rem;
     margin-right: -.5rem;
     width: 0%;
 }
 #timeline:hover > #progressbar{
-    background-color: aquamarine;
+    background-color: lightseagreen;
 }
-#timeline:hover > #playhead{
+#playhead{
+    display:none;
     background-color: white;
     /* border-radius: 100rem; */
     height: 1rem;
     width: 1rem;
 }
+#timeline:hover > #playhead, #playhead.dragging{
+    display: block;
+}
 
-/* --------- */
+/* overview */
+
+#overview-box {
+    height: calc(var(--top-box-height) + var(--player-height));
+    width: calc(var(--top-box-height) + var(--player-height));
+    position: relative;
+    /* border */
+    border: solid darkslategrey var(--banner-box-border-size);
+    border-top: 0rem;
+    border-right: 0rem;
+    box-sizing: border-box;
+    /* background */
+    background-image: url(./ressources/artwork/80s.png);
+    background-size: contain;
+}
+#overview-name-box{
+    background-color: rgba(0,0,0,.7);
+    height: calc(var(--player-height) - var(--banner-box-border-size));
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+    /* position box */
+    position: absolute;
+    bottom: 0rem;
+    right: 0;
+    /* position text at the center */
+    display:flex;
+    align-items: center;
+}
+#overview-name{
+    color: white;
+    font-family: 'Montserrat';
+    font-size: 1.6rem;
+    font-weight: 400;
+    /* clip large text with '...' */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#overview-name:hover, #overview-name-box:hover > #overview-name {
+    background: white;
+    color: black;
+    /* show whole text */
+    text-align: left;
+    overflow:visible;
+    text-overflow: clip;
+}
+
+/* ###################################################################### */
 /* Song list */
 
 #song-list {
-    margin-top: 20rem;
+    margin-top: 25rem;
     margin-bottom: 15rem;
     margin-left: auto;
     margin-right: auto;
@@ -128,7 +212,7 @@ body { background-color: rgb(30, 30, 30);}
 .cover-box {
     position: relative;
     height: 20rem;
-    width:20rem;
+    width: 20rem;
     text-align: center;
 }
 .cover-box:hover {
@@ -146,12 +230,16 @@ body { background-color: rgb(30, 30, 30);}
 .control-icon {
     background-size: contain;
     display: none;
-    height: 5rem;
-    width: 5rem;
+    --h: 4rem;
+    --pad: 1rem;
+    height: var(--h);
+    width: var(--h);
+    padding: var(--pad);
     /* center relative to cover-box */
     position: absolute;
-    top: calc(50% - 2.5rem);
-    left: calc(50% - 2.5rem);
+    --offset: calc(50% - (var(--h) + var(--pad))/2);
+    top: var(--offset);
+    left: var(--offset);
 }
 .cover-box:hover > .control-icon {
     display: block;
@@ -178,7 +266,7 @@ body { background-color: rgb(30, 30, 30);}
 .duration, .date {
     color: silver;
     font-family: 'Montserrat';
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 200;
 }
 .date {
@@ -201,7 +289,7 @@ body { background-color: rgb(30, 30, 30);}
 }
 
 
-/* ----- */
+/* ###################################################################### */
 /* Fonts */
 
 /* montserrat-200 - latin */
