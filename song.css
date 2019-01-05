@@ -1,37 +1,25 @@
 :root {
     font-size: 62.5%;
-    --top-box-height: 12rem;
-    --player-height: 4rem;
-    --banner-box-height: calc(var(--top-box-height) + var(--player-height));
-    --banner-box-border-size: 1rem;
 }
 * { margin: 0; padding: 0; }
-body { background-color: rgb(30, 30, 30);}
-a {text-decoration: none;}
-a:hover {text-decoration: underline;}
+body {
+    background-color: rgb(30, 30, 30);
+}
 
-/* ###################################################################### */
-/* Banner box */
+/* BANNER BOX */
 
 #banner-box {
     background-color: darkslategrey;
-    border: solid darkslategrey var(--banner-box-border-size);
-    border-bottom: 0rem;
-    height : var(--banner-box-height);
-    width: 100%;
-    /* fix top center */
-    position: fixed;
-    top: 5%;
-    left: 50%;
-    transform: translate(-50%);
-    z-index:1;
+    height: 49,1rem;
+    width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5rem;
+    box-sizing: content-box;
     /* flexbox */
     display: flex;
-    justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
 }
-
-/* title */
 
 #title {
     background-color: white;
@@ -40,13 +28,12 @@ a:hover {text-decoration: underline;}
     font-size: 8rem;
     font-family: Arial Black,Arial Bold,Gadget,sans-serif;
     height: var(--top-box-height);
+    text-align: center;
 }
 #title:hover {
     background-color: darkslategrey;
     color: white;
 }
-
-/* audio player */
 
 #audio-player{
     background: darkslategrey;
@@ -142,90 +129,16 @@ a:hover {text-decoration: underline;}
     display: block;
 }
 
-/* overview */
-
-#overview-box {
-    min-height: var(--banner-box-height);
-    min-width: var(--banner-box-height);
-    position: relative;
-    /* border */
-    border: solid rgba(1,1,1,0) var(--banner-box-border-size);
-    border-top: 0rem;
-    border-right: 0rem;
-    box-sizing: border-box;
-    /* background */
-    background-color: rgba(0,0,0,.5);
-    background-size: contain;
-    background-clip: content-box;
-    background-repeat: no-repeat;
-}
-#overview-name-box{
-    background-color: rgba(0,0,0,.7);
-    height: calc(var(--player-height) - var(--banner-box-border-size));
-    width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    box-sizing: border-box;
-    /* position box */
-    position: absolute;
-    bottom: 0rem;
-    right: 0;
-    /* position text at the center */
-    display:flex;
-    align-items: center;
-}
-#overview-name{
-    color: white;
-    font-family: 'Montserrat';
-    font-size: 1.6rem;
-    font-weight: 400;
-    /* clip large text with '...' */
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-#overview-name:hover, #overview-name-box:hover > #overview-name {
-    background: white;
-    color: black;
-    /* show whole text */
-    text-align: left;
-    overflow:visible;
-    text-overflow: clip;
-}
-
-/* ###################################################################### */
-/* Song list */
-
-#song-list {
-    margin-top: 25rem;
-    margin-bottom: 15rem;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 70rem;
-    padding-left: 1em;
-    padding-right: 1em;
-    /* flex */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+/* SONG */
 
 .song {
-    margin-bottom: 2rem;
-    margin-left: 1em;
-    margin-right: 1em;
-    padding: .5rem .5rem 0rem .5rem;
-    width: 20rem;
-    position: relative;
+    margin: 3rem;
+    outline: solid white .5rem;
+    background-color: teal;
 }
-.song.active {
-    outline: solid white;
-}
-
 .cover-box {
     position: relative;
-    height: 20rem;
-    width: 20rem;
+    width: 100%;
     text-align: center;
 }
 .cover-box:hover {
@@ -277,9 +190,9 @@ a:hover {text-decoration: underline;}
 }
 
 .duration, .date {
-    color: silver;
+    color: white;
     font-family: 'Montserrat';
-    font-size: 1rem;
+    font-size: 1.4rem;
     font-weight: 200;
 }
 .date {
@@ -296,14 +209,14 @@ a:hover {text-decoration: underline;}
     clear: both;
     color: white;
     font-family: 'Montserrat';
-    font-size: 1.6rem;
+    font-size: 3rem;
     font-weight: 600;
     letter-spacing: 0rem;
+    text-align: center;
+    width: 100%;
 }
 
-
-/* ###################################################################### */
-/* Fonts */
+/* FONTS */
 
 /* montserrat-200 - latin */
 @font-face {
