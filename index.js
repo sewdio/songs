@@ -75,10 +75,10 @@ function makeSongHTML(song){
     const controlIcon = '<img class="control-icon"></div>\n';
     const coverBox = '<div class="cover-box">\n'+artwork+controlIcon+'</div>\n';
 
-    const audio = '<audio class="audio" preload="none" src='+song.audio_path+'></audio>\n';
+    const audio = '<audio class="audio" preload="metadata" src='+song.audio_path+'></audio>\n';
 
     const dateCreated = '<div class="date">'+song.date_created+'</div>\n';
-    const duration = '<div class="duration">--:--</div>\n';
+    const duration = '<div class="duration">--.--</div>\n';
     const name = '<a class="name" href="song.html?name='+song.name+'">'+song.name+'</a>\n';
     const descBox = '<div class="desc-box">\n'+dateCreated+duration+name+'</div>\n';
 

@@ -70,7 +70,7 @@ function makeSongHTML(song){
     const name = '<div class="name">'+song.name+'</div>\n';
     const descBox = '<div class="desc-box">\n'+name+'</div>\n';
 
-    return descBox+coverBox+audio;
+    return coverBox+audio+descBox;
 }
 
 // Utility //

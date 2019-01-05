@@ -9,7 +9,6 @@ a:hover {text-decoration: underline;}
 /* BANNER BOX */
 
 #banner-box {
-    background-color: darkslategrey;
     height: 49,1rem;
     width: 40rem;
     margin-left: auto;
@@ -132,9 +131,9 @@ a:hover {text-decoration: underline;}
 /* SONG */
 
 .song {
+    padding: 1rem;
     margin: 3rem;
     outline: solid white .5rem;
-    background-color: teal;
 }
 .cover-box {
     position: relative;
@@ -186,7 +185,7 @@ a:hover {text-decoration: underline;}
 }
 
 .desc-box {
-    padding: .6rem .1rem .6rem .1rem;
+    padding-top: 1rem;
 }
 
 .duration, .date {
@@ -212,7 +211,7 @@ a:hover {text-decoration: underline;}
     font-size: 3rem;
     font-weight: 600;
     letter-spacing: 0rem;
-    text-align: center;
+    padding-left: 1rem;
     width: 100%;
 }
 
