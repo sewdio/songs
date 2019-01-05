@@ -14,6 +14,8 @@ function main(){
 
     var playBtn = document.getElementById('play-btn');
     playBtn.addEventListener('click',playBtnClick);
+    var volumeBtn = document.getElementById('volume-btn');
+    volumeBtn.addEventListener('click',volumeBtnClick);
 
     var mainAudio = document.getElementById('main-audio');
     mainAudio.addEventListener('timeupdate',timeUpdate);
@@ -134,7 +136,7 @@ function pauseSong(song){
     getMainAudio().pause();
     song.classList.remove('playing');
 }
-function updateMainPlayer(song){
+function updateBannerBox(song){
     var mainAudio = getMainAudio();
     var totalTime = document.getElementById('total-time');
     var overviewBox = document.getElementById('overview-box');
@@ -149,10 +151,11 @@ function updateMainPlayer(song){
     overviewBox.style.backgroundImage = 'url('+currentSongArtwork.src+')';
     overviewName.innerHTML = currentSongName.innerHTML;
 }
-function togglePlay(requestedSong, previousSong = null){
+function togglePlay(requestedSong){
+    previousSong = currentSong;
     currentSong = requestedSong;
     if(previousSong && previousSong != currentSong){
-        updateMainPlayer(currentSong)
+        updateBannerBox(currentSong)
         stopSong(previousSong);
         playSong(currentSong);
     }
@@ -163,14 +166,12 @@ function togglePlay(requestedSong, previousSong = null){
 }
 
 function coverBoxClick(){
-    var previousSong = currentSong;
     requestedSong = this.parentNode;
-    togglePlay(requestedSong, previousSong);
+    togglePlay(requestedSong);
 }
 function addSongDuration(){
     var song = this.parentNode;
     var durationNode = song.getElementsByClassName('duration')[0];
-    console.log(durationNode.innerHTML);
     durationNode.innerHTML = durationToMinSec(this.duration);
 }
 
@@ -178,6 +179,17 @@ function addSongDuration(){
 
 function playBtnClick(){
     togglePlay(currentSong);
+}
+function volumeBtnClick(){
+    var mainAudio = getMainAudio();
+    if(mainAudio.muted){
+        mainAudio.muted = false;
+        this.classList.remove('muted');
+    }
+    else {
+        mainAudio.muted = true;
+        this.classList.add('muted');
+    }
 }
 
 function timeUpdate(){
@@ -224,7 +236,7 @@ function movePlayhead(e) {
 }
 
 function playNextSong(){
-    var nextSong = currentSong.parentNode.nextSibling;
+    var nextSong = currentSong.nextSibling;
     togglePlay(nextSong);
 }
 function mainAudioPlaying(){
