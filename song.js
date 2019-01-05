@@ -41,9 +41,9 @@ function getParams(param) {
 }
 
 function jsonParsed(json){
-    var name = getParams('name');
-    var song = document.getElementsByClassName('song')[0];
+    var name = decodeURIComponent(getParams('name'));
     var songJson = json.find(function(elt){return elt.name == name});
+    var song = document.getElementsByClassName('song')[0];
     song.innerHTML = makeSongHTML(songJson);
     song.setAttribute('data-src',songJson.audio_path);
 
