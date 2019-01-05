@@ -79,7 +79,7 @@ function makeSongHTML(song){
 
     const dateCreated = '<div class="date">'+song.date_created+'</div>\n';
     const duration = '<div class="duration">--:--</div>\n';
-    const name = '<div class="name">'+song.name+'</div>\n';
+    const name = '<a class="name" href="song.html">'+song.name+'</a>\n';
     const descBox = '<div class="desc-box">\n'+dateCreated+duration+name+'</div>\n';
 
     return coverBox+audio+descBox;
@@ -237,7 +237,8 @@ function movePlayhead(e) {
 
 function playNextSong(){
     var nextSong = currentSong.nextSibling;
-    togglePlay(nextSong);
+    if(nextSong)
+        togglePlay(nextSong);
 }
 function mainAudioPlaying(){
     var playBtn = document.getElementById('play-btn');
